@@ -72,6 +72,33 @@ private:
 	string displayVector() const;
 };
 
+//=====================================Sequence class===============================================
+class Sequence
+{
+public:
+	//Constructors
+	Sequence();
+	Sequence(const string& s);
+
+	//Getters
+	string get_original() const;
+	vector<Expression> get_parsed() const;
+
+	//Setter
+	void set(string& s);
+
+	//Others
+	void display() const;
+
+private:
+	//Data members
+	string original;
+	vector<Expression> parsed;
+	bool valid;
+	vector<Expression> parse(string s);
+	string displayVector() const;
+};
+
 
 //===============================Token functions===============================================
 //Constructors
