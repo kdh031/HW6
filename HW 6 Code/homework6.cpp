@@ -60,6 +60,8 @@ public:
 
 	//Others
 	void display() const;
+    string displayVector() const;
+
 
 private:
 	//Data members
@@ -69,7 +71,6 @@ private:
 	bool valid;
 	Exp_type type;
 	vector<Token> tokenize(string s);
-	string displayVector() const;
 };
 
 //=====================================Sequence class===============================================
@@ -89,6 +90,8 @@ public:
 
 	//Others
 	void display() const;
+    string displayVector() const;
+
 
 private:
 	//Data members
@@ -96,7 +99,6 @@ private:
 	vector<Expression> parsed;
 	bool valid;
 	vector<Expression> parse(string s);
-	string displayVector() const;
 };
 
 
@@ -368,6 +370,118 @@ string Expression::displayVector() const
 	for(int i=0; i<int(tokenized.size()); i++)
 	{
           	display = display + tokenized[i].get_token() + ";";
+        }
+        return display;
+}
+
+
+//================================Sequence Functions========================================================
+//Constructors
+Sequence::Sequence()
+{
+	original = "";
+	valid = false;
+}
+
+Sequence::Sequence(const string& s)
+{
+	string str = s;
+	set(str);
+}
+
+//Getters
+string Sequence::get_original() const
+{
+	return original;
+}
+
+vector<Expression> Sequence::get_parsed() const
+{
+	return parsed;
+}
+
+//Setter
+void Sequence::set(string& s)
+{
+	original = s;
+	parsed = parse(s);
+	valid = 0;
+}
+
+//Others
+vector<Expression> Sequence::parse(string s)
+{
+/*	vector<Token> list;
+	string tkn = "";
+	// for each character in the string
+	for(int i=0; i<= int(s.length()); i++)
+	{
+		string chr = string(1, s[i]);
+		// if space, discard, close previous token if open
+		if (chr == " ")
+		{
+               		if (tkn != "")
+			{
+				Token token(tkn);
+				list.push_back(token);
+				tkn = "";
+			}
+		}
+		// else if single-char type, parse, close previous token if open
+               	else if (chr == "(" || chr == ")" || chr == "=" || chr == "+" || chr == "-" || chr == "*" || chr == "/") 
+		{
+			if (tkn != "")
+			{
+                        	Token token(tkn);
+				list.push_back(token);
+				tkn = "";
+			}
+                    	Token token(chr);
+                    	list.push_back(token);
+		}
+                // else add to open token
+                else
+		{
+			tkn = tkn + chr;
+		}
+	}
+	if (tkn != "")
+	{
+              	Token token(tkn);
+               	list.push_back(token);
+	}
+	return list;
+*/}
+
+void Sequence::display() const
+{
+/*	cout << "original = " << original << endl;
+	cout << "parsed = " << displayVector() << endl;
+	cout << "number of tokens = " << parsed.size() << endl;
+	cout << "postfix =  " << endl;
+	cout << "valid = false" << endl;
+    cout << endl;
+	//type based off enum Exp_type {assignment, arithmetic, illegal}
+	if(type == 0)
+    {
+            cout << "type = " << "assignment" << endl;
+    }
+    if(type == 1)
+    {
+            cout << "type = " << "arithmetic" << endl;
+    }
+    if(type == 2)
+    {
+            cout << "type = " << "illegal" << endl;
+	}
+*/}
+
+string Sequence::displayVector() const
+{
+	string display = "";
+	for(int i=0; i<int(parsed.size()); i++)
+	{
+          	display = display + parsed[i].displayVector() + ";";
         }
         return display;
 }
