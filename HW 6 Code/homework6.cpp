@@ -231,26 +231,26 @@ void Token::display() const
 	{
 		cout << "type = " << "ID" << endl;
 	}
-        if(type == 1)
-        {
-                cout << "type = " << "INT" << endl;
-        }
-        if(type == 2)
-        {
-                cout << "type = " << "OP" << endl;
-        }
-        if(type == 3)
-        {
-                cout << "type = " << "EQ" << endl;
-        }
-        if(type == 4)
-        {
-                cout << "type = " << "OpenBrace" << endl;
-        }
-        else if(type == 5)
-        {
-                cout << "type = " << "CloseBrace" << endl;
-        }
+    if(type == 1)
+    {
+            cout << "type = " << "INT" << endl;
+    }
+    if(type == 2)
+    {
+            cout << "type = " << "OP" << endl;
+    }
+    if(type == 3)
+    {
+            cout << "type = " << "EQ" << endl;
+    }
+    if(type == 4)
+    {
+            cout << "type = " << "OpenBrace" << endl;
+    }
+    else if(type == 5)
+    {
+            cout << "type = " << "CloseBrace" << endl;
+    }
 	else if (type == 6)
 	{
 		cout << "type = " << "INVALID" << endl;
@@ -411,47 +411,17 @@ void Sequence::set(string& s)
 //Others
 vector<Expression> Sequence::parse(string s)
 {
-/*	vector<Token> list;
-	string tkn = "";
-	// for each character in the string
-	for(int i=0; i<= int(s.length()); i++)
-	{
-		string chr = string(1, s[i]);
-		// if space, discard, close previous token if open
-		if (chr == " ")
-		{
-               		if (tkn != "")
-			{
-				Token token(tkn);
-				list.push_back(token);
-				tkn = "";
-			}
-		}
-		// else if single-char type, parse, close previous token if open
-               	else if (chr == "(" || chr == ")" || chr == "=" || chr == "+" || chr == "-" || chr == "*" || chr == "/") 
-		{
-			if (tkn != "")
-			{
-                        	Token token(tkn);
-				list.push_back(token);
-				tkn = "";
-			}
-                    	Token token(chr);
-                    	list.push_back(token);
-		}
-                // else add to open token
-                else
-		{
-			tkn = tkn + chr;
-		}
-	}
-	if (tkn != "")
-	{
-              	Token token(tkn);
-               	list.push_back(token);
-	}
-	return list;
-*/}
+    string delim = ";";
+    size_t pos = 0;
+    string token;
+    while ((pos = s.find(delim)) != string::npos) 
+    {
+        token = s.substr(0, pos);
+        cout << token << endl;
+        s.erase(0, pos + delim.length());
+    }
+    cout << s << endl;
+}
 
 void Sequence::display() const
 {
@@ -515,6 +485,23 @@ int main()
 	exp3.display();
 	Expression exp4("1$%5+dfv*2@-@7===14 g");
 	exp4.display();
+
+
+    const string start  = "=== expression evaluation program starts ===";
+    const string end  = "=== expression evaluation program ends ===";
+
+    string input;
+    cout << "input:";
+    cin >> input;
+
+    Sequence seq1 = input;
+    cout << "seq1:" << seq1.get_original() << endl;
+
+    string action;
+    cout << "action:";
+    cin >> action;
+    cout << endl;
+
 	return 0;
 }
 
