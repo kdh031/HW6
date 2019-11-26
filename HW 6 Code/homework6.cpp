@@ -30,8 +30,34 @@ int main()
 	Token token8("=");
 	token8.display();
 
+	Expression exp01("((2+3)*4)");
+	exp01.display();
+	Expression exp02("a1+b2-cc");
+	exp02.display();
+	Expression exp03("a1=1");
+	exp03.display();
+	Expression exp04("a+b-c*d/e");
+	exp04.display();
+	Expression exp05("(a+(b-d)*d)/e");
+	exp05.display();
+	Expression exp06("5*((2+3)*(4+5))+4");
+	exp06.display();
+
+	Expression exp07("3+ + 4");
+	exp07.display();
+	Expression exp08(")2+3");
+	exp08.display();
+	Expression exp09("(2+3))");
+	exp09.display();
+	Expression exp10("a b + c");
+	exp10.display();
+
+	Expression exp0("((2+3)*(4+5))+4");
+	exp0.display();
 	Expression exp1("a + b = 5");
 	exp1.display();
+	Expression exp11("(a + b) = 5");
+	exp11.display();
 	Expression exp2("(ab+cd)");
 	exp2.display();
 	Expression exp3("c12 + 44 = 5*g8");
