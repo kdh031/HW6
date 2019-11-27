@@ -97,7 +97,8 @@ int main()
 			cin >> action; 
 			if (action == "=") { cout << "evaluate (sequence: " << seq1.displaySequence() << ")" << endl; }
 			else if (action == ">") { cout << "display prefix expression" << endl; }
-			else if (action == "<") { 
+			else if (action == "<") 
+			{ 
 				cout << "postfix: " << endl;
 				vector<Expression> seq = seq1.get_parsed();
 				for (int i=0; i< (int)seq.size(); i++)
