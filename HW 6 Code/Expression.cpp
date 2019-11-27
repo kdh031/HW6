@@ -109,7 +109,7 @@ void Expression::transformToPostfix() {
 		stack.pop_back();
 	}
 
-	postfix = output;
+	postfix = output; 
 }
 
 int Expression::isOperator(string token) {
@@ -198,7 +198,7 @@ bool Expression::isValid()
 	for (int i=0; i<int(tokenized.size()); i++) 
 	{
 		string token = tokenized[i].get_token();
-		
+
 		if (token == "(") {
 			// Create new subexpression
 			SubExpression* subExp = new SubExpression;
@@ -258,6 +258,64 @@ bool Expression::isValid()
   
 	return true;
 }
+
+
+int Expression::expEval ( )
+{
+	vector<string> stack;
+	int answer = NULL;
+
+	if(isIntExp())
+	{
+		for (int i=0; i<int(postfix.size()); i++)
+		{
+			string token = postfix[i].get_token();
+			if (postfix[i].get_type()  == 1)
+			{
+				stack.push_back(token);
+			}
+			else if (postfix[i].get_type() == 2)
+			{
+				string second = stack.back();
+				stack.pop_back();
+				string first = stack.back();
+				stack.pop_back();
+				if ( token == "+")
+				{
+					answer = int(first) + int(second);
+				}
+				else if (token == "-")
+				{
+					answer = int(first) - int(second);
+				}
+						else if (token == "/")
+				{
+					answer = int(first) / int(second);
+				}        
+				else if (token == "*")
+				{
+					answer = int(first) * int(second);
+				}      
+				stack.push_back(answer);
+			}
+		}
+	}
+	return answer;
+}
+
+bool Expression::isIntExp ( )
+{
+	//check all are integers or operators /,*,+,-
+	for (int i=0; i<int(postfix.size()); i++)
+	{
+		if(postfix[i].get_type() != 1 || postfix[i].get_type() != 2)
+		{
+		return false;
+		}
+	}
+	return true;
+}
+
 
 //Others
 void Expression::tokenize(string s)

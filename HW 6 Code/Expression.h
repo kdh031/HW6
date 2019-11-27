@@ -39,6 +39,8 @@ public:
 	string get_postfix() const;
 	vector<Token> get_tokenized() const;
 	int openSubExpression(int before);
+	int expEval();
+	bool isIntExp();
 
 	//Setter
 	void set(string& s);
