@@ -16,7 +16,7 @@ struct SubExpression
 	string identity = "";
 	void display() {
 		cout << "display: ";
-		for (int i=0; i< tokenized.size(); i++) {
+		for (int i=0; i< (int)tokenized.size(); i++) {
 			cout << tokenized[i].get_token();
 		}
 		cout << endl;

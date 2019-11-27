@@ -31,7 +31,7 @@ string Expression::get_postfix() const
 {
 	string pf;
 	if (postfix.size() > 0) {
-		for (int i=0; i<postfix.size(); i++) {
+		for (int i=0; i< (int)postfix.size(); i++) {
 			pf += postfix[i].get_token() + " ";
 		}
 	} else { pf = "invalid"; }
@@ -67,7 +67,7 @@ void Expression::transformToPostfix() {
 	vector<Token> stack;
 	vector<Token> output;
 
-	for (int i=0; i<tokenized.size(); i++) {
+	for (int i=0; i< (int)tokenized.size(); i++) {
 		string token = tokenized[i].get_token();
 		int tokenLevel = isOperator(token);
 		if (token == "(") {                             // Left parenthesis
@@ -143,7 +143,7 @@ int Expression::nextASCII() {  // Find an unused variable identity for subexpres
 	// Find the next available identitiy ascii value 
 	for (int j=97; j<123; j++) {
 		bool available = true;
-		for (int k=0; k<values.size(); k++) {
+		for (int k=0; k< (int)values.size(); k++) {
 			if (j == values[k]) {
 				available = false;  // If already used
 			}
@@ -252,7 +252,7 @@ bool Expression::isValid()
     // If there are no valid subexpressions, it is not a valid expression
 	if (expStack.size() == 0) { return false; }  
 	// All subexpressions should alternate between id/integer and operator/assignment
-    for (int i=0; i<expStack.size(); i++) {
+    for (int i=0; i< (int)expStack.size(); i++) {
     	if (!isAlternating(expStack[i])) { return false; }
     }
   
@@ -263,7 +263,7 @@ bool Expression::isValid()
 int Expression::expEval ( )
 {
 	vector<string> stack;
-	int answer = NULL;
+	int answer = 0;
 
 	if(isIntExp())
 	{
@@ -282,31 +282,36 @@ int Expression::expEval ( )
 				stack.pop_back();
 				if ( token == "+")
 				{
-					answer = int(first) + int(second);
+					answer = stoi(first) + stoi(second);
 				}
 				else if (token == "-")
 				{
-					answer = int(first) - int(second);
+					answer = stoi(first) - stoi(second);
 				}
-						else if (token == "/")
+				else if (token == "/")
 				{
-					answer = int(first) / int(second);
+					answer = stoi(first) / stoi(second);
 				}        
 				else if (token == "*")
 				{
-					answer = int(first) * int(second);
-				}      
-				stack.push_back(answer);
+					answer = stoi(first) * stoi(second);
+				}
+				stringstream ss;
+				ss<<answer;
+				string s;
+				ss>>s;   
+				stack.push_back(s);
 			}
 		}
 	}
 	return answer;
 }
 
+
 bool Expression::isIntExp ( )
 {
 	//check all are integers or operators /,*,+,-
-	for (int i=0; i<int(postfix.size()); i++)
+	for (int i=0; i<(int)postfix.size(); i++)
 	{
 		if(postfix[i].get_type() != 1 || postfix[i].get_type() != 2)
 		{
@@ -366,7 +371,7 @@ void Expression::display() const
 	cout << "number of tokens = " << tokenized.size() << endl;
 	cout << "postfix = ";
 	if (postfix.size() > 0) {
-		for (int i=0; i<postfix.size(); i++) {
+		for (int i=0; i< (int)postfix.size(); i++) {
 			cout << postfix[i].get_token() << " ";
 		}
 	} else { cout << "invalid"; }
