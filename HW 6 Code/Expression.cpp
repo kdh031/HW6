@@ -60,6 +60,9 @@ void Expression::set(string& s)
 
 	if (type == arithmetic) {
 		transformToPostfix(); 
+		expValue = expEval();
+	} else {
+		expValue = 0;
 	}
 }
 
@@ -313,9 +316,9 @@ bool Expression::isIntExp ( )
 	//check all are integers or operators /,*,+,-
 	for (int i=0; i<(int)postfix.size(); i++)
 	{
-		if(postfix[i].get_type() != 1 || postfix[i].get_type() != 2)
+		if(postfix[i].get_type() != 1 && postfix[i].get_type() != 2)
 		{
-		return false;
+			return false;
 		}
 	}
 	return true;
@@ -368,6 +371,7 @@ void Expression::display() const
 {
 	cout << "original = " << original << endl;
 	cout << "tokenized = " << displayExpression() << endl;
+	cout << "value = " << expValue << endl;
 	cout << "number of tokens = " << tokenized.size() << endl;
 	cout << "postfix = ";
 	if (postfix.size() > 0) {

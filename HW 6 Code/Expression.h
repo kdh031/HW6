@@ -65,6 +65,7 @@ private:
 	vector<SubExpression*> expStack;
 	vector<int> values;
 	int nextASCII();
+	int expValue;
 };
 
 #endif /* EXPRESSION_H */
